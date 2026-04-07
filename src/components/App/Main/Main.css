@@ -1,0 +1,9 @@
+ @font-face {
+  src: url("../assets/yellowtail-regular.woff") format("woff");
+  font-family: "Yellowtail";
+}
+ 
+ .container {
+   display: flex;
+   justify-content: space-around;
+ }
