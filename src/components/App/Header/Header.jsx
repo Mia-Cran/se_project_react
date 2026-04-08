@@ -1,7 +1,7 @@
 import "./Header.css";
 import headerLogo from "../../../assets/logo.png";
 
-function Header() {
+function Header({ onAddClick }) {
   const currentDate = new Date().toLocaleString('default', { 
     month: 'long', 
     day: 'numeric' 
@@ -17,9 +17,15 @@ function Header() {
       </div>
       
       <div className="header__user-controls">
-        <button className="header__add-clothes-btn">
-          + Add clothes
-        </button>
+      <button
+        className="header__add-clothes-btn"
+        onClick={() => {
+        alert("add clothes clicked");
+        onAddClick();
+       }}
+     >
+        + Add clothes
+      </button>
         <div className="header__user-info">
           <p className="header__username">Terrence Tegegne</p>
           <img 
