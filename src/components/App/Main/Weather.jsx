@@ -1,4 +1,3 @@
-import WeatherCard from "../WeatherCard/WeatherCard";
 
 function WeatherCard({ weather }) {
   return (
@@ -9,4 +8,4 @@ function WeatherCard({ weather }) {
   );
 }
 
-export default WeatherCard;
+export default Weather;

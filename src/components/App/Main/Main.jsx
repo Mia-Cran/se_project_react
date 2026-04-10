@@ -2,6 +2,8 @@ import "./Main.css";
 import ItemCard from "./ItemCard/ItemCard";
 import avatar from "../../../assets/avatar.png";
 console.log(avatar);
+import Weather from "./Weather";
+
 
 
 function Main({ weather, clothingItems, onCardClick }) {
@@ -14,6 +16,7 @@ function Main({ weather, clothingItems, onCardClick }) {
   return (
     <main className="container">
       <div className="main__top-bar">
+        <Weather weather={weather} />
         <div className="main__left">
           <img
             src="/src/assets/smaller-logo.png"
@@ -21,10 +24,9 @@ function Main({ weather, clothingItems, onCardClick }) {
             className="smaller__logo"
           />
 
-          <div className="main__date-location">
+         
             <p className="main__date-location">June 15, New York</p>
           </div>
-        </div>
 
         <div className="main__right">
           <button className="main__add-clothes-btn">+ Add clothes</button>
