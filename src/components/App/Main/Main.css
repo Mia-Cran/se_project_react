@@ -1,9 +1,63 @@
- @font-face {
-  src: url("../assets/yellowtail-regular.woff") format("woff");
-  font-family: "Yellowtail";
+.container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 32px auto 0;
+  background-color: #ffffff;
+  padding: 32px;
+  box-sizing: border-box;
 }
- 
- .container {
-   display: flex;
-   justify-content: space-around;
- }
+
+.main__top-bar {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.main__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 40px;
+}
+
+.main__date-location {
+  display: flex;
+  gap: 4px;
+}
+
+.main__date,
+.main__location,
+.main__username {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.main__add-clothes-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.smaller__logo {
+  width: 89px;
+  height: 40px;
+}
+
+.main__avatar {
+  width: 40px;
+  height: 40px;
+}
+.main__user-info {
+  display: flex;
+  align-items: center;
+}

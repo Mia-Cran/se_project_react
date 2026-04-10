@@ -1,15 +1,20 @@
 function ItemCard({ item, onCardClick }) {
   return (
-    <div
+    <div>
+    <button onClick={() => console.log("clicked")}>
+      test click
+    </button>
+     <img
+      src={item.imageUrl}
+      alt={item.name}
+      style={{ cursor: "pointer" }}
       onClick={() => {
-        alert("card clicked");
+        console.log("clicked");
         onCardClick("preview", item);
       }}
-    >
-      <img src={item.imageUrl} alt={item.name} />
+      />
       <p>{item.name}</p>
-    </div>
+      </div>
   );
 }
-
 export default ItemCard;

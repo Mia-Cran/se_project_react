@@ -5,6 +5,7 @@ import Main from './Main/Main.jsx'
 import { useState, useEffect } from "react";
 import Footer from "./Footer/Footer.jsx";
 import { defaultClothingItems } from '../../utils/constants.js';
+import { getWeather } from "../../utils/weatherApi.js";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -12,6 +13,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   /*Tracks which modal is currently open ("preview" or "")*/
   const [selectedCard, setSelectedCard] = useState(null);
+ 
 
   function handleOpenModal(modalName, card = null) {
   console.log("handleOpenModal fired:", modalName, card);
@@ -45,37 +47,41 @@ function App() {
   }, [activeModal]);
      /*Runs whenever activeModal changes*/
 
-  return (
+    useEffect(() => {
+      console.log("useEffect running");
+
+      getWeather().then((data) => {
+      setWeather(data);
+    });
+  }, []);
+
+     return (
     <div className="page">
       <Header onAddClick={() => handleOpenModal("add-garment")}/>
       <Main weather={weather} 
        clothingItems={clothingItems} 
        onCardClick={handleOpenModal}
        />
-
-       <p>activeModal: {activeModal}</p>
+     
+       <p>{activeModal}</p>
 
        {activeModal === "preview" && (
-        <>
-        {/*Only render modal when activeModal is "preview"*/}
-         <div className="modal modal_is-opened" onClick={handleCloseModal}
-         > 
-         {/*Closes modal when clicking outside content */}
-
-          <div className="modal__content" 
-               style={{ backgroundColor: "red", padding: "20px" }}
+      
+         <div className="modal modal_is-opened" onClick={handleCloseModal}>
+           <div className="modal__content" 
                onClick={(evt) => evt.stopPropagation()}
             >
-             {/* Prevents modal from closing when clicking inside */}
-            <button type="button" onClick={handleCloseModal}>
+             <button type="button" 
+             className="modal__close-btn"
+             onClick={handleCloseModal}
+             >
               X</button>
-               {/* Closes modal when X is clicked */}
-            <img src={selectedCard?.imageUrl} alt={selectedCard?.name} />
+             <img src={selectedCard?.imageUrl} alt={selectedCard?.name} />
             <p>{selectedCard?.name}</p>
+            <p>{selectedCard?.weather}</p>
             </div>
           </div>
-          </>
-       )}
+          )}
        
        {activeModal === "add-garment" && (
   <>
@@ -92,7 +98,7 @@ function App() {
     </div>
   </>
 )}
-
+  
       <Footer />
     </div>
   );
