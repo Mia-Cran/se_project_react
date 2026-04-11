@@ -2,17 +2,29 @@ import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
 import avatar from "../../assets/avatar.png";
 import Weather from "../WeatherCard/WeatherCard";
-
+import { getWeatherCondition } from "../../utils/constants";
 
 
 function Main({ weather, clothingItems, onCardClick }) {
 
-    const filteredItems = clothingItems.filter((item) => {
-    return item.weather === weather?.condition;
+  // wait until weather loads
+  if (!weather || weather.temp === undefined) {
+    return (
+      <main className="container">
+        <p>Loading...</p>
+      </main>
+    );
+  }
+
+  const weatherType = getWeatherCondition(weather.temp);
+
+  const filteredItems = clothingItems.filter((item) => {
+    return item.weather === weatherType;
   });
 
 
-  return (
+
+return (
     <main className="container">
       <div className="main__top-bar">
         <div className="main__left">
@@ -40,6 +52,7 @@ function Main({ weather, clothingItems, onCardClick }) {
         </div>
       </div>
       <Weather weather={weather} />
+
 
       <div className="main__items">
         {filteredItems.length === 0 ? (

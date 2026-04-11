@@ -10,16 +10,24 @@
 }
 
 .weather__card-img{
-    width: 100%;
-    object-fit: cover;
-    object-position: right top;
-    position: absolute;
+  width: 100%;
+  object-fit: cover;
+  object-position: right top;
+  position: absolute;
+  display: block;
   
 }
-.weather__card-temp-img {
-  display: block;
+.weather__card-temp {
   position: absolute;
   z-index: 3;
   left: 20px;
-  bottom: 25px;
+  bottom: -15px;
+  color: white;
+}
+.weather__card-info {
+  margin-top: 10px;
+  color: black;
+  position: relative;
+  z-index: 4;
+  top: 110px;
 }

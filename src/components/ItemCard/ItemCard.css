@@ -1,11 +1,26 @@
 .item__card {
-  padding: 20px;
-  box-sizing: border-box;
+  position: relative;
+  width: 100%;
 }
 
-.item__card-img{
-  height: 100%;
+.item__card-img {
+  display: block;
   width: 100%;
-  object-fit: cover;
+  height: auto;
   border-radius: 20px;
+}
+
+.item__card-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  margin: 0;
+  z-index: 2;
+  background-color: white;
+  color: black;
+  padding: 4px 8px;
+}
+.weather__card-info {
+  color: red;
+  font-size: 20px;
 }
