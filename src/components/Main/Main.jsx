@@ -5,7 +5,7 @@ import Weather from "../WeatherCard/WeatherCard";
 import { getWeatherCondition } from "../../utils/constants";
 
 
-function Main({ weather, clothingItems, onCardClick }) {
+function Main({ weather, clothingItems, onCardClick, onAddClick }) {
 
   // wait until weather loads
   if (!weather || weather.temp === undefined) {
@@ -39,7 +39,10 @@ return (
           </div>
 
         <div className="main__right">
-          <button className="main__add-clothes-btn">+ Add clothes</button>
+          <button className="main__add-clothes-btn" onClick={() => {
+           console.log("button clicked");
+           onAddClick();
+           }}>+ Add clothes</button>
 
           <div className="main__user-info">
             <p className="main__username">Terrence Tegegne</p>

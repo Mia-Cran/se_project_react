@@ -14,12 +14,18 @@ function App() {
   /*Tracks which modal is currently open ("preview" or "")*/
   const [selectedCard, setSelectedCard] = useState(null);
 
+  console.log("activeModal:", activeModal);
+
 
   function handleOpenModal(modalName, card = null) {
     console.log("handleOpenModal fired:", modalName, card);
     setActiveModal(modalName)
     setSelectedCard(card);
   } /* Opens the selected modal and stores the clicked card data */
+
+  const handleAddClick = () => {
+  setActiveModal("add-garment");
+};
 
   function handleCloseModal() {
     setActiveModal("");
@@ -62,6 +68,8 @@ function App() {
         <Main weather={weather}
           clothingItems={clothingItems}
           onCardClick={handleOpenModal}
+          onAddClick={handleAddClick}
+
         />
         <Footer />
       </div>
@@ -85,7 +93,6 @@ function App() {
       )}
 
       {activeModal === "add-garment" && (
-        <>
           <div className="modal modal_is-opened" onClick={handleCloseModal}>
             <div
               className="modal__content"
@@ -94,10 +101,11 @@ function App() {
               <button type="button" onClick={handleCloseModal}>
                 X
               </button>
-              <p>Add garment modal is open</p>
+              <p style={{ color: "black", backgroundColor: "white", padding: "20px" }}>
+                 Add garment modal is open
+              </p>
             </div>
           </div>
-        </>
       )}
 
     </div>
