@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 import Footer from "../Footer/Footer.jsx";
 import { defaultClothingItems } from "../../utils/clothingItems.js";
 import { getWeather } from "../../utils/weatherApi.js";
-import avatar from "../../assets/avatar.png";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -153,28 +153,7 @@ function App() {
 
       {/* PREVIEW MODAL */}
       {activeModal === "preview" && (
-        <div className="modal modal_is-opened" onClick={handleCloseModal}>
-          <div
-            className="modal__content modal__content_type_preview"
-            onClick={(evt) => evt.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="modal__close-btn"
-              onClick={handleCloseModal}
-            >
-              X
-            </button>
-            <img
-              src={selectedCard?.link}
-              alt={selectedCard?.name}
-              className="modal__preview-image"
-            />
-            <div className="modal__footer"></div>
-            <p className="modal__caption">{selectedCard?.name}</p>
-            <p className="modal__weather">Weather: {selectedCard?.weather}</p>
-          </div>
-        </div>
+        <ItemModal card={selectedCard} onClose={handleCloseModal} />
       )}
     </>
   );
