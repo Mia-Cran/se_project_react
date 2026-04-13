@@ -155,7 +155,7 @@ function App() {
       {activeModal === "preview" && (
         <div className="modal modal_is-opened" onClick={handleCloseModal}>
           <div
-            className="modal__content"
+            className="modal__content modal__content_type_preview"
             onClick={(evt) => evt.stopPropagation()}
           >
             <button
@@ -165,9 +165,14 @@ function App() {
             >
               X
             </button>
-            <img src={selectedCard?.imageUrl} alt={selectedCard?.name} />
-            <p>{selectedCard?.name}</p>
-            <p>{selectedCard?.weather}</p>
+            <img
+              src={selectedCard?.link}
+              alt={selectedCard?.name}
+              className="modal__preview-image"
+            />
+            <div className="modal__footer"></div>
+            <p className="modal__caption">{selectedCard?.name}</p>
+            <p className="modal__weather">Weather: {selectedCard?.weather}</p>
           </div>
         </div>
       )}

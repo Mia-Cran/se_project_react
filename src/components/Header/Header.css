@@ -43,3 +43,47 @@
   position: relative;
 
 }
+
+@media screen and (max-width: 480px) {
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo menu"
+      "date date"
+      "add user";
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .header__logo {
+    grid-area: logo;
+    width: 89px;
+    height: 40px;
+  }
+
+  .header__date {
+    grid-area: date;
+    margin: 0;
+  }
+
+  .header__add-clothes-btn {
+    grid-area: add;
+    justify-self: start;
+    width: auto;
+  }
+
+  .header__user-info {
+    grid-area: user;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header__username {
+    display: none;
+  }
+}
+

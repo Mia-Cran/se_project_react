@@ -2,9 +2,10 @@ import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
 import Weather from "../WeatherCard/WeatherCard";
 import { getWeatherCondition } from "../../utils/weatherApi";
+import Header from "../Header/Header";
 
 
-function Main({ weather, clothingItems, onCardClick }) {
+function Main({ weather, clothingItems, onCardClick, onAddClick }) {
 
   // wait until weather loads
   if (!weather || weather.temp === undefined) {

@@ -1,5 +1,5 @@
 .container {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   width: 100%;
 }
 
@@ -15,22 +15,40 @@
   display: flex;
   align-items: center;
   gap: 16px;
-
 }
 
-.main__date-location{
+.main__date-location {
   margin: 0;
   font-size: 20px;
   font-weight: 700;
-
 }
 .main__items {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 15px;
-  grid-auto-rows: calc((100vw-47px)/2);
+  grid-auto-rows: calc((100vw-47px) / 2);
   margin-top: 80px;
-
+  list-style: none;
 }
 
+@media screen and (max-width: 480px) {
+  .main__top-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
+  .main__left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .main__right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

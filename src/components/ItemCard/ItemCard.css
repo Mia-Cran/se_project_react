@@ -13,14 +13,33 @@
 .item__card-title {
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 134px;
   margin: 0;
   z-index: 2;
   background-color: white;
   color: black;
   padding: 4px 8px;
+  border-radius: 4px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
 }
 .weather__card-info {
   color: red;
   font-size: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .item__card {
+    width: 100%;
+  }
+
+  .item__card-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .item__card-title {
+    font-size: 16px;
+  }
 }

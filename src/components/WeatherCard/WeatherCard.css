@@ -31,3 +31,15 @@
   z-index: 4;
   top: 110px;
 }
+
+@media screen and (max-width: 480px) {
+  .weather__card {
+    width: 100%;
+  }
+
+  .weather__card-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
