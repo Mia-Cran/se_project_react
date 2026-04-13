@@ -1,11 +1,10 @@
 import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
-import avatar from "../../assets/avatar.png";
 import Weather from "../WeatherCard/WeatherCard";
-import { getWeatherCondition } from "../../utils/constants";
+import { getWeatherCondition } from "../../utils/weatherApi";
 
 
-function Main({ weather, clothingItems, onCardClick, onAddClick }) {
+function Main({ weather, clothingItems, onCardClick }) {
 
   // wait until weather loads
   if (!weather || weather.temp === undefined) {
@@ -37,22 +36,6 @@ return (
          
             <p className="main__date-location">June 15, New York</p>
           </div>
-
-        <div className="main__right">
-          <button className="main__add-clothes-btn" onClick={() => {
-           console.log("button clicked");
-           onAddClick();
-           }}>+ Add clothes</button>
-
-          <div className="main__user-info">
-            <p className="main__username">Terrence Tegegne</p>
-            <img
-              className="main__avatar"
-              src={avatar}
-              alt="avatar"
-            />
-          </div>
-        </div>
       </div>
       <Weather weather={weather} />
 

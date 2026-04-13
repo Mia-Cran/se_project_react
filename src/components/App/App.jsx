@@ -1,11 +1,13 @@
 console.log("App component is loading");
-import './App.css';
-import Header from '../Header/Header.jsx';
-import Main from '../Main/Main.jsx'
+import "./App.css";
+import Header from "../Header/Header.jsx";
+import Main from "../Main/Main.jsx";
 import { useState, useEffect } from "react";
 import Footer from "../Footer/Footer.jsx";
-import { defaultClothingItems } from '../../utils/constants.js';
+import { defaultClothingItems } from "../../utils/clothingItems.js";
 import { getWeather } from "../../utils/weatherApi.js";
+import avatar from "../../assets/avatar.png";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -13,20 +15,33 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   /*Tracks which modal is currently open ("preview" or "")*/
   const [selectedCard, setSelectedCard] = useState(null);
-
-  console.log("activeModal:", activeModal);
-
+  const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   function handleOpenModal(modalName, card = null) {
     console.log("handleOpenModal fired:", modalName, card);
-    setActiveModal(modalName)
+    setActiveModal(modalName);
     setSelectedCard(card);
   } /* Opens the selected modal and stores the clicked card data */
 
   const handleAddClick = () => {
-  setActiveModal("add-garment");
-};
+    console.log("Add clothes clicked");
+    setActiveModal("add-garment");
+    console.log("setting activeModal to add-garment");
+  };
 
+  function handleAddGarmentSubmit(evt) {
+    evt.preventDefault();
+
+    console.log({
+      name,
+      imageUrl,
+    });
+
+    setName("");
+    setImageUrl("");
+    handleCloseModal();
+  }
   function handleCloseModal() {
     setActiveModal("");
     setSelectedCard(null);
@@ -43,13 +58,12 @@ function App() {
       }
     } /*Closes modal when Escape key is pressed*/
 
-
     document.addEventListener("keydown", handleEscape);
     /*Starts listening for Escape key*/
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
-    };/*Cleans up event listener when modal closes*/
+    }; /*Cleans up event listener when modal closes*/
   }, [activeModal]);
   /*Runs whenever activeModal changes*/
 
@@ -61,59 +75,104 @@ function App() {
     });
   }, []);
 
-  return (
-    <div className="page">
-      <div className="page__wrapper">
-        {/* <Header onAddClick={() => handleOpenModal("add-garment")}/> */}
-        <Main weather={weather}
-          clothingItems={clothingItems}
-          onCardClick={handleOpenModal}
-          onAddClick={handleAddClick}
+  console.log("current activeModal:", activeModal);
 
-        />
-        <Footer />
+  const isFormValid = name.trim() !== "" && imageUrl.trim() !== "";
+  console.log("FORM STATE:", name, imageUrl, isFormValid);
+
+  return (
+    <>
+      <div className="page">
+        <div className="page__wrapper">
+          <Header onAddClick={handleAddClick} />
+          <Main
+            weather={weather}
+            clothingItems={clothingItems}
+            onCardClick={handleOpenModal}
+            onAddClick={handleAddClick}
+          />
+          <Footer />
+        </div>
       </div>
 
-      {activeModal === "preview" && (
+      {/* ADD GARMENT MODAL */}
+      {activeModal === "add-garment" && (
+        <ModalWithForm
+          title="New garment"
+          name="add-garment"
+          buttonText="Add garment"
+          isOpen={true}
+          onClose={handleCloseModal}
+          isValid={isFormValid}
+          onSubmit={handleAddGarmentSubmit}
+        >
+          <label className="modal__label">
+            Name
+            <input
+              type="text"
+              className="modal__input"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
 
+          <label className="modal__label">
+            Image
+            <input
+              type="url"
+              className="modal__input"
+              placeholder="Image URL"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+            />
+          </label>
+
+          <fieldset className="modal__fieldset">
+            <legend className="modal__legend">Select the weather type:</legend>
+
+            <div className="modal__radio-buttons">
+              <label className="modal__radio-label">
+                <input type="radio" name="weather" value="hot" />
+                Hot
+              </label>
+
+              <label className="modal__radio-label">
+                <input type="radio" name="weather" value="warm" />
+                Warm
+              </label>
+
+              <label className="modal__radio-label">
+                <input type="radio" name="weather" value="cold" />
+                Cold
+              </label>
+            </div>
+          </fieldset>
+        </ModalWithForm>
+      )}
+
+      {/* PREVIEW MODAL */}
+      {activeModal === "preview" && (
         <div className="modal modal_is-opened" onClick={handleCloseModal}>
-          <div className="modal__content"
+          <div
+            className="modal__content"
             onClick={(evt) => evt.stopPropagation()}
           >
-            <button type="button"
+            <button
+              type="button"
               className="modal__close-btn"
               onClick={handleCloseModal}
             >
-              X</button>
+              X
+            </button>
             <img src={selectedCard?.imageUrl} alt={selectedCard?.name} />
             <p>{selectedCard?.name}</p>
             <p>{selectedCard?.weather}</p>
           </div>
         </div>
       )}
-
-      {activeModal === "add-garment" && (
-          <div className="modal modal_is-opened" onClick={handleCloseModal}>
-            <div
-              className="modal__content"
-              onClick={(evt) => evt.stopPropagation()}
-            >
-              <button type="button" onClick={handleCloseModal}>
-                X
-              </button>
-              <p style={{ color: "black", backgroundColor: "white", padding: "20px" }}>
-                 Add garment modal is open
-              </p>
-            </div>
-          </div>
-      )}
-
-    </div>
+    </>
   );
 }
 
-
-
-export default App
-
-
+export default App;
