@@ -1,10 +1,9 @@
 .header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  padding: 32px;
   
 }
 
@@ -12,8 +11,6 @@
 .header__right {
   display: flex;
   gap: 16px;
-  position: relative;
-  top: 90px;
 }
 .header__user-info {
   display: flex;
@@ -46,7 +43,7 @@
 
 @media screen and (max-width: 480px) {
   .header {
-    display: grid;
+    /*display: grid;*/
     grid-template-columns: 1fr auto;
     grid-template-areas:
       "logo menu"
@@ -55,6 +52,7 @@
     align-items: center;
     gap: 12px;
     padding: 16px;
+    flex-direction: column;
   }
 
   .header__logo {
@@ -82,8 +80,5 @@
     gap: 8px;
   }
 
-  .header__username {
-    display: none;
-  }
 }
 

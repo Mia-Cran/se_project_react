@@ -51,4 +51,9 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .main__items {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: calc((100vw-47px) / 2);
+  }
 }

@@ -2,28 +2,34 @@ import "./Header.css";
 import avatar from "../../assets/avatar.png";
 
 function Header({ onAddClick }) {
-  const currentDate = new Date().toLocaleString('default', { 
-    month: 'long', 
-    day: 'numeric' 
+  const currentDate = new Date().toLocaleString("default", {
+    month: "long",
+    day: "numeric",
   });
 
   return (
     <header className="header">
       <div className="header__right">
+        <img
+          src="/src/assets/smaller-logo.png"
+          alt="logo"
+          className="smaller__logo"
+        />
+         <div className="main__left">
+          <p className="main__date-location">June 15, New York</p>
+        </div>
+      </div>
+      <div className="header__right">
         <button className="header__add-clothes-btn" onClick={onAddClick}>
           + Add clothes
         </button>
-      
+
         <div className="header__user-info">
           <p className="header__username">Terrence Tegegne</p>
-          <img
-            className="header__avatar"
-            src={avatar}
-            alt="avatar"
-          />
+          <img className="header__avatar" src={avatar} alt="avatar" />
         </div>
-       </div>
-      </header>
+      </div>
+    </header>
   );
 }
 export default Header;
