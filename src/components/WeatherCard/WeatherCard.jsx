@@ -1,5 +1,4 @@
 import weatherImage from "../../assets/weather.png";
-import tempImage from "../../../src/assets/degree.png";
 import "./WeatherCard.css";
 
 function WeatherCard({ weather }) {
