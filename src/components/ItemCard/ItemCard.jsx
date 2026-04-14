@@ -9,11 +9,10 @@ function ItemCard({ item, onCardClick }) {
         alt={item.name}
         className="item__card-img"
         onClick={() => {
-          console.log("IMAGE CLICKED");
           onCardClick("preview", item);
         }}
-       />
-      </li>
+      />
+    </li>
   );
 }
 export default ItemCard;

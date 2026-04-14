@@ -10,7 +10,7 @@ function ModalWithForm({
   isValid,
   onSubmit,
 }) {
-  console.log("isValid:", isValid);
+  
   if (!isOpen) return null;
   return (
     <div className="modal modal_is-opened" onClick={onClose}>

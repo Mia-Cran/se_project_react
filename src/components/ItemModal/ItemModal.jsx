@@ -13,21 +13,14 @@ function ItemModal({ card, onClose }) {
           type="button"
           className="modal__close-btn"
           onClick={onClose}
-        >
-          X
-        </button>
-
-        <img
-          src={card.link}
-          alt={card.name}
-          className="modal__preview-image"
+          aria-label="Close"
         />
+
+        <img src={card.link} alt={card.name} className="modal__preview-image" />
 
         <div className="modal__footer">
           <p className="modal__caption">{card.name}</p>
-          <p className="modal__weather">
-            Weather: {card.weather}
-          </p>
+          <p className="modal__weather">Weather: {card.weather}</p>
         </div>
       </div>
     </div>

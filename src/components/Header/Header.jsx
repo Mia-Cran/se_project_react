@@ -1,5 +1,6 @@
 import "./Header.css";
 import avatar from "../../assets/avatar.png";
+import logo from "../../assets/smaller-logo.png";
 
 function Header({ onAddClick }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -10,13 +11,9 @@ function Header({ onAddClick }) {
   return (
     <header className="header">
       <div className="header__right">
-        <img
-          src="/src/assets/smaller-logo.png"
-          alt="logo"
-          className="smaller__logo"
-        />
-         <div className="main__left">
-          <p className="main__date-location">June 15, New York</p>
+        <img src={logo} alt="WTWR app logo" className="smaller__logo" />
+        <div className="main__left">
+          <p className="main__date-location">{currentDate}, New York</p>
         </div>
       </div>
       <div className="header__right">
@@ -26,7 +23,7 @@ function Header({ onAddClick }) {
 
         <div className="header__user-info">
           <p className="header__username">Terrence Tegegne</p>
-          <img className="header__avatar" src={avatar} alt="avatar" />
+          <img className="header__avatar" src={avatar} alt="User avatar" />
         </div>
       </div>
     </header>

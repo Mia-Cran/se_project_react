@@ -1,4 +1,4 @@
-console.log("App component is loading");
+
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -19,15 +19,12 @@ function App() {
   const [imageUrl, setImageUrl] = useState("");
 
   function handleOpenModal(modalName, card = null) {
-    console.log("handleOpenModal fired:", modalName, card);
     setActiveModal(modalName);
     setSelectedCard(card);
   } /* Opens the selected modal and stores the clicked card data */
 
   const handleAddClick = () => {
-    console.log("Add clothes clicked");
     setActiveModal("add-garment");
-    console.log("setting activeModal to add-garment");
   };
 
   function handleAddGarmentSubmit(evt) {
@@ -68,23 +65,21 @@ function App() {
   /*Runs whenever activeModal changes*/
 
   useEffect(() => {
-    console.log("useEffect running");
-
-    getWeather().then((data) => {
+     getWeather().then((data) => {
       setWeather(data);
-    });
+    })
+     .catch((err) => {
+       console.error("Weather fetch failed:", err);
+  });
   }, []);
 
-  console.log("current activeModal:", activeModal);
-
   const isFormValid = name.trim() !== "" && imageUrl.trim() !== "";
-  console.log("FORM STATE:", name, imageUrl, isFormValid);
 
   return (
     <>
       <div className="page">
         <div className="page__wrapper">
-          <Header onAddClick={handleAddClick} />
+          <Header onAddClick={handleAddClick} city={weather?.city} />
           <Main
             weather={weather}
             clothingItems={clothingItems}

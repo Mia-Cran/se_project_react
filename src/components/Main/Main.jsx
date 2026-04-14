@@ -1,8 +1,9 @@
 import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
-import Weather from "../WeatherCard/WeatherCard";
+import WeatherCard from "../WeatherCard/WeatherCard";
 import { getWeatherCondition } from "../../utils/weatherApi";
-import Header from "../Header/Header";
+
+
 
 function Main({ weather, clothingItems, onCardClick, onAddClick }) {
   // wait until weather loads
@@ -22,9 +23,9 @@ function Main({ weather, clothingItems, onCardClick, onAddClick }) {
 
   return (
     <main className="container">
-      <Weather weather={weather} />
+      <WeatherCard weather={weather} />
 
-      <div className="main__items">
+      <ul className="main__items">
         {filteredItems.length === 0 ? (
           <p>No items for this weather</p>
         ) : (
@@ -32,7 +33,7 @@ function Main({ weather, clothingItems, onCardClick, onAddClick }) {
             <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
           ))
         )}
-      </div>
+      </ul>
     </main>
   );
 }
