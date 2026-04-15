@@ -124,7 +124,7 @@
   cursor: not-allowed;
 }
 
-.modal__close {
+.modal__close-btn {
   position: absolute;
   top: 20px;
   right: 28px;
@@ -136,8 +136,8 @@
   cursor: pointer;
 }
 
-.modal__close::before,
-.modal__close::after {
+.modal__close-btn::before,
+.modal__close-btn::after {
   content: "";
   position: absolute;
   top: 9px;
@@ -147,11 +147,11 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal__close::before {
+.modal__close-btn::before {
   transform: rotate(45deg);
 }
 
-.modal__close::after {
+.modal__close-btn::after {
   transform: rotate(-45deg);
 }
 

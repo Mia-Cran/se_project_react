@@ -1,14 +1,6 @@
 @import "./vendor/normalize.css";
 @import "./vendor/fonts.css";
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
 #root {
   min-height: 100vh;
 }
