@@ -17,6 +17,8 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [isFahrenheit, setIsFahrenheit] = useState(true);
+  const [currentTemperature, setCurrentTemperature] = useState("F");
 
   function handleOpenModal(modalName, card = null) {
     setActiveModal(modalName);
@@ -79,7 +81,11 @@ function App() {
     <>
       <div className="page">
         <div className="page__wrapper">
-          <Header onAddClick={handleAddClick} city={weather?.city} />
+          <Header 
+           onAddClick={handleAddClick} 
+           city={weather?.city}
+           isFahrenheit={isFahrenheit}
+           setIsFahrenheit={setIsFahrenheit} />
           <Main
             weather={weather}
             clothingItems={clothingItems}
