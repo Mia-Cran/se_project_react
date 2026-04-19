@@ -1,4 +1,3 @@
-
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -8,6 +7,7 @@ import { defaultClothingItems } from "../../utils/clothingItems.js";
 import { getWeather } from "../../utils/weatherApi.js";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -19,6 +19,10 @@ function App() {
   const [imageUrl, setImageUrl] = useState("");
   const [isFahrenheit, setIsFahrenheit] = useState(true);
   const [currentTemperature, setCurrentTemperature] = useState("F");
+
+  function handleToggleSwitchChange() {
+    setCurrentTemperature(currentTemperature === "F" ? "C" : "F");
+  }
 
   function handleOpenModal(modalName, card = null) {
     setActiveModal(modalName);
@@ -67,12 +71,13 @@ function App() {
   /*Runs whenever activeModal changes*/
 
   useEffect(() => {
-     getWeather().then((data) => {
-      setWeather(data);
-    })
-     .catch((err) => {
-       console.error("Weather fetch failed:", err);
-  });
+    getWeather()
+      .then((data) => {
+        setWeather(data);
+      })
+      .catch((err) => {
+        console.error("Weather fetch failed:", err);
+      });
   }, []);
 
   const isFormValid = name.trim() !== "" && imageUrl.trim() !== "";
@@ -80,20 +85,28 @@ function App() {
   return (
     <>
       <div className="page">
-        <div className="page__wrapper">
-          <Header 
-           onAddClick={handleAddClick} 
-           city={weather?.city}
-           isFahrenheit={isFahrenheit}
-           setIsFahrenheit={setIsFahrenheit} />
-          <Main
-            weather={weather}
-            clothingItems={clothingItems}
-            onCardClick={handleOpenModal}
-            onAddClick={handleAddClick}
-          />
-          <Footer />
-        </div>
+        <CurrentTemperatureUnitContext.Provider
+          value={{
+            currentTemperatureUnit: currentTemperature,
+            handleToggleSwitchChange,
+          }}
+        >
+          <div className="page__wrapper">
+            <Header
+              onAddClick={handleAddClick}
+              city={weather?.city}
+              isFahrenheit={isFahrenheit}
+              setIsFahrenheit={setIsFahrenheit}
+            />
+            <Main
+              weather={weather}
+              clothingItems={clothingItems}
+              onCardClick={handleOpenModal}
+              onAddClick={handleAddClick}
+            />
+            <Footer />
+          </div>
+        </CurrentTemperatureUnitContext.Provider>
       </div>
 
       {/* ADD GARMENT MODAL */}
