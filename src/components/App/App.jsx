@@ -18,10 +18,19 @@ function App() {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [isFahrenheit, setIsFahrenheit] = useState(true);
-  const [currentTemperature, setCurrentTemperature] = useState("F");
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
+  
+  const handleToggleSwitchChange = () => {
+    currentTemperatureUnit ==="F"
+      ? setCurrentTemperatureUnit("C")
+      : setCurrentTemperatureUnit("F");
+  };
+  
+  
+  
   function handleToggleSwitchChange() {
-    setCurrentTemperature(currentTemperature === "F" ? "C" : "F");
+    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   }
 
   function handleOpenModal(modalName, card = null) {
