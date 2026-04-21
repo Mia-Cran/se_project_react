@@ -8,6 +8,7 @@ import { getWeather } from "../../utils/weatherApi.js";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import Profile from "../Profile/Profile";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -26,12 +27,6 @@ function App() {
       ? setCurrentTemperatureUnit("C")
       : setCurrentTemperatureUnit("F");
   };
-  
-  
-  
-  function handleToggleSwitchChange() {
-    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
-  }
 
   function handleOpenModal(modalName, card = null) {
     setActiveModal(modalName);
@@ -96,7 +91,7 @@ function App() {
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{
-            currentTemperatureUnit: currentTemperature,
+            currentTemperatureUnit,
             handleToggleSwitchChange,
           }}
         >
@@ -107,7 +102,7 @@ function App() {
               isFahrenheit={isFahrenheit}
               setIsFahrenheit={setIsFahrenheit}
             />
-            <Main
+            <Profile
               weather={weather}
               clothingItems={clothingItems}
               onCardClick={handleOpenModal}
