@@ -8,6 +8,8 @@ function ItemCard({ item, onCardClick }) {
         src={item.link}
         alt={item.name}
         className="item__card-img"
+        onLoad={() => console.log("IMAGE LOADED:", item.link)}
+        onError={() => console.log("IMAGE FAILED:", item.link)}
         onClick={() => {
           onCardClick("preview", item);
         }}

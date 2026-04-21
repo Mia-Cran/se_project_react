@@ -20,7 +20,7 @@ export function getWeather() {
       .then((res) => res.json())
       .then((data) => {
         return {
-            temperature: {
+            temp: {
               F: data.main.temp,
               C: Math.round((data.main.temp - 32) * 5 / 9),
             },

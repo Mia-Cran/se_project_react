@@ -5,11 +5,12 @@ import { useState, useEffect } from "react";
 import Footer from "../Footer/Footer.jsx";
 import { defaultClothingItems } from "../../utils/clothingItems.js";
 import { getWeather } from "../../utils/weatherApi.js";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AddItemModal from "../AddItemModal/AddItemModal";
 
 const currentUser = {
   name: "Terrence Tegegne",
@@ -26,9 +27,8 @@ function App() {
   const [isFahrenheit, setIsFahrenheit] = useState(true);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
-  
   const handleToggleSwitchChange = () => {
-    currentTemperatureUnit ==="F"
+    currentTemperatureUnit === "F"
       ? setCurrentTemperatureUnit("C")
       : setCurrentTemperatureUnit("F");
   };
@@ -38,22 +38,28 @@ function App() {
     setSelectedCard(card);
   } /* Opens the selected modal and stores the clicked card data */
 
+
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
 
-  function handleAddGarmentSubmit(evt) {
-    evt.preventDefault();
+  function handleAddGarmentSubmit(newItem) {
+    const itemToAdd = {
+    _id: crypto.randomUUID(),
+    name: newItem.name,
+    weather: newItem.weather,
+    link: newItem.imageUrl,
+    };
 
-    console.log({
-      name,
-      imageUrl,
-    });
+     console.log("FINAL ITEM:", itemToAdd);
 
+   setClothingItems((prevItems) => [itemToAdd, ...prevItems]);
+    handleCloseModal();
     setName("");
     setImageUrl("");
-    handleCloseModal();
   }
+
+
   function handleCloseModal() {
     setActiveModal("");
     setSelectedCard(null);
@@ -73,6 +79,8 @@ function App() {
     document.addEventListener("keydown", handleEscape);
     /*Starts listening for Escape key*/
 
+    console.log(clothingItems);
+
     return () => {
       document.removeEventListener("keydown", handleEscape);
     }; /*Cleans up event listener when modal closes*/
@@ -89,10 +97,11 @@ function App() {
       });
   }, []);
 
-  const isFormValid = name.trim() !== "" && imageUrl.trim() !== "";
+  const isFormValid = 
+     name.trim() !== "" && imageUrl.trim() !== "" && weather !=="";  
 
   return (
-    <>
+    <BrowserRouter>
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{
@@ -101,87 +110,55 @@ function App() {
           }}
         >
           <CurrentUserContext.Provider value={currentUser}>
-          <div className="page__wrapper">
-            <Header
-              onAddClick={handleAddClick}
-              city={weather?.city}
-              user={currentUser} 
-              isFahrenheit={isFahrenheit}
-              setIsFahrenheit={setIsFahrenheit}
-            />
-            <Profile
-              weather={weather}
-              clothingItems={clothingItems}
-              onCardClick={handleOpenModal}
-              onAddClick={handleAddClick}
-            />
-            <Footer />
-          </div>
+            <div className="page__wrapper">
+              <Header onAddClick={handleAddClick} city={weather?.city} />
+
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Main
+                      weather={weather}
+                      clothingItems={clothingItems}
+                      onCardClick={handleOpenModal}
+                    />
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <Profile
+                      weather={weather}
+                      clothingItems={clothingItems}
+                      onCardClick={handleOpenModal}
+                      onAddClick={handleAddClick}
+                    />
+                  }
+                />
+              </Routes>
+
+              <Footer />
+            </div>
           </CurrentUserContext.Provider>
-          </CurrentTemperatureUnitContext.Provider>
+        </CurrentTemperatureUnitContext.Provider>
       </div>
 
       {/* ADD GARMENT MODAL */}
-      {activeModal === "add-garment" && (
-        <ModalWithForm
-          title="New garment"
-          name="add-garment"
-          buttonText="Add garment"
-          isOpen={true}
-          onClose={handleCloseModal}
-          isValid={isFormValid}
-          onSubmit={handleAddGarmentSubmit}
-        >
-          <label className="modal__label">
-            Name
-            <input
-              type="text"
-              className="modal__input"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-
-          <label className="modal__label">
-            Image
-            <input
-              type="url"
-              className="modal__input"
-              placeholder="Image URL"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-            />
-          </label>
-
-          <fieldset className="modal__fieldset">
-            <legend className="modal__legend">Select the weather type:</legend>
-
-            <div className="modal__radio-buttons">
-              <label className="modal__radio-label">
-                <input type="radio" name="weather" value="hot" />
-                Hot
-              </label>
-
-              <label className="modal__radio-label">
-                <input type="radio" name="weather" value="warm" />
-                Warm
-              </label>
-
-              <label className="modal__radio-label">
-                <input type="radio" name="weather" value="cold" />
-                Cold
-              </label>
-            </div>
-          </fieldset>
-        </ModalWithForm>
-      )}
-
+      <AddItemModal
+        isOpen={activeModal === "add-garment"}
+        onClose={handleCloseModal}
+        onSubmit={handleAddGarmentSubmit}
+        isValid={isFormValid}
+        name={name}
+        imageUrl={imageUrl}
+        setName={setName}
+        setImageUrl={setImageUrl}
+      />
       {/* PREVIEW MODAL */}
       {activeModal === "preview" && (
         <ItemModal card={selectedCard} onClose={handleCloseModal} />
       )}
-    </>
+    </BrowserRouter>
   );
 }
 

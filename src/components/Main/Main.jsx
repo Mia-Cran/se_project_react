@@ -8,9 +8,10 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 
 
 function Main({ weather, clothingItems, onCardClick, onAddClick }) {
+  console.log("weather in Main:", weather);
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   // wait until weather loads
-  if (!weather || weather.temperature) {
+  if (!weather || !weather.temp) {
     return (
       <main className="container">
         <p>Loading...</p>
@@ -18,7 +19,7 @@ function Main({ weather, clothingItems, onCardClick, onAddClick }) {
     );
   }
 
-  const weatherType = getWeatherCondition(weather.temp.F);
+  const weatherType = getWeatherCondition(weather.temp);
 
   const filteredItems = clothingItems.filter((item) => {
     return item.weather === weatherType;
