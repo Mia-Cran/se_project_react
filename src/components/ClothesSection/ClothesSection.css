@@ -1,3 +1,5 @@
+
+
 .clothes-section__items {
   display: flex;
   flex-wrap: wrap;
@@ -5,7 +7,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
-  margin-top: 20px;
+  margin-top: 2px;
  
 }
 .clothes-section__items li {
@@ -20,6 +22,7 @@
     background: none;
     font-family: "Cabinet Grotesk", sans-serif;
     margin-left: 8px;
+    font-weight: 700;
 }
 .clothes-section__header {
     display: flex;
@@ -29,5 +32,7 @@
    
 }
 .clothes-section__title {
-    margin: 0;
+    margin-right: 15px;
+    font-size: 20px;
+    font-family: "Cabinet Grotesk", sans-serif;
 }

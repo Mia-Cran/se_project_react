@@ -9,6 +9,11 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
+const currentUser = {
+  name: "Terrence Tegegne",
+};
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -95,10 +100,12 @@ function App() {
             handleToggleSwitchChange,
           }}
         >
+          <CurrentUserContext.Provider value={currentUser}>
           <div className="page__wrapper">
             <Header
               onAddClick={handleAddClick}
               city={weather?.city}
+              user={currentUser} 
               isFahrenheit={isFahrenheit}
               setIsFahrenheit={setIsFahrenheit}
             />
@@ -110,7 +117,8 @@ function App() {
             />
             <Footer />
           </div>
-        </CurrentTemperatureUnitContext.Provider>
+          </CurrentUserContext.Provider>
+          </CurrentTemperatureUnitContext.Provider>
       </div>
 
       {/* ADD GARMENT MODAL */}

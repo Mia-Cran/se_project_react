@@ -2,12 +2,16 @@ import "./Header.css";
 import avatar from "../../assets/avatar.png";
 import logo from "../../assets/smaller-logo.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 function Header({ onAddClick, city }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -24,7 +28,9 @@ function Header({ onAddClick, city }) {
         </button>
 
         <div className="header__user-info">
-          <p className="header__username">Terrence Tegegne</p>
+          <p className="header__username">
+             {currentUser ? currentUser.name : ""}
+             </p>
           <img className="header__avatar" src={avatar} alt="User avatar" />
         </div>
       </div>

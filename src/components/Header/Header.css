@@ -24,6 +24,8 @@
   gap: 8px;
   font-size: 20px;
   font-weight: 700;
+  margin-right: 80px;
+
 
 }
 .header__username {
@@ -43,6 +45,7 @@
   font-size: 15px;
   z-index: 10;
   position: relative;
+  
 
 }
 

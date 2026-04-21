@@ -1,0 +1,14 @@
+.sidebar {
+    width: 229px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 2px;
+    font-size: 20px;
+    font-family: "Cabinet Grotesk", sans-serif;
+}
+.sidebar__avatar {
+    width: 56px;
+    height: 56px;
+}
