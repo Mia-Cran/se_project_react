@@ -3,7 +3,6 @@ import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import { useState, useEffect } from "react";
 import Footer from "../Footer/Footer.jsx";
-import { defaultClothingItems } from "../../utils/clothingItems.js";
 import { getWeather } from "../../utils/weatherApi.js";
 import ItemModal from "../ItemModal/ItemModal";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
@@ -11,6 +10,7 @@ import Profile from "../Profile/Profile";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import { getItems, addItem, deleteItem } from "../../utils/api";
 
 const currentUser = {
   name: "Terrence Tegegne",
@@ -18,12 +18,10 @@ const currentUser = {
 
 function App() {
   const [weather, setWeather] = useState(null);
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   /*Tracks which modal is currently open ("preview" or "")*/
   const [selectedCard, setSelectedCard] = useState(null);
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
   const [isFahrenheit, setIsFahrenheit] = useState(true);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
@@ -38,27 +36,25 @@ function App() {
     setSelectedCard(card);
   } /* Opens the selected modal and stores the clicked card data */
 
-
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
 
-  function handleAddGarmentSubmit(newItem) {
-    const itemToAdd = {
-    _id: crypto.randomUUID(),
-    name: newItem.name,
-    weather: newItem.weather,
-    link: newItem.imageUrl,
-    };
-
-     console.log("FINAL ITEM:", itemToAdd);
-
-   setClothingItems((prevItems) => [itemToAdd, ...prevItems]);
-    handleCloseModal();
-    setName("");
-    setImageUrl("");
+  function handleAddGarmentSubmit(newItem, reset) {
+    addItem({
+      name: newItem.name,
+      weather: newItem.weather,
+      imageUrl: newItem.imageUrl,
+    })
+      .then((item) => {
+        setClothingItems((prevItems) => [item, ...prevItems]);
+        handleCloseModal();
+        reset();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
-
 
   function handleCloseModal() {
     setActiveModal("");
@@ -79,8 +75,6 @@ function App() {
     document.addEventListener("keydown", handleEscape);
     /*Starts listening for Escape key*/
 
-    console.log(clothingItems);
-
     return () => {
       document.removeEventListener("keydown", handleEscape);
     }; /*Cleans up event listener when modal closes*/
@@ -97,8 +91,29 @@ function App() {
       });
   }, []);
 
-  const isFormValid = 
-     name.trim() !== "" && imageUrl.trim() !== "" && weather !=="";  
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log("items from server:", data);
+        setClothingItems(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  function handleDeleteItem(card) {
+    deleteItem(card._id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== card._id),
+        );
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   return (
     <BrowserRouter>
@@ -148,15 +163,13 @@ function App() {
         isOpen={activeModal === "add-garment"}
         onClose={handleCloseModal}
         onSubmit={handleAddGarmentSubmit}
-        isValid={isFormValid}
-        name={name}
-        imageUrl={imageUrl}
-        setName={setName}
-        setImageUrl={setImageUrl}
       />
       {/* PREVIEW MODAL */}
       {activeModal === "preview" && (
-        <ItemModal card={selectedCard} onClose={handleCloseModal} />
+        <ItemModal 
+           card={selectedCard} 
+           onClose={handleCloseModal}
+           onDelete={handleDeleteItem} />
       )}
     </BrowserRouter>
   );
