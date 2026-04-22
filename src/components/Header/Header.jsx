@@ -2,7 +2,7 @@ import "./Header.css";
 import avatar from "../../assets/avatar.png";
 import logo from "../../assets/smaller-logo.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 

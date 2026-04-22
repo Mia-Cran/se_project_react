@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 import Footer from "../Footer/Footer.jsx";
 import { getWeather } from "../../utils/weatherApi.js";
 import ItemModal from "../ItemModal/ItemModal";
-import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
 import Profile from "../Profile/Profile";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItem, deleteItem } from "../../utils/api";
@@ -87,6 +87,7 @@ function App() {
         setWeather(data);
       })
       .catch((err) => {
+        console.log("items:", data);
         console.error("Weather fetch failed:", err);
       });
   }, []);
