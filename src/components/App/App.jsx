@@ -87,7 +87,6 @@ function App() {
         setWeather(data);
       })
       .catch((err) => {
-        console.log("items:", data);
         console.error("Weather fetch failed:", err);
       });
   }, []);
@@ -95,7 +94,6 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        console.log("items from server:", data);
         setClothingItems(data);
       })
       .catch((err) => {
@@ -167,10 +165,11 @@ function App() {
       />
       {/* PREVIEW MODAL */}
       {activeModal === "preview" && (
-        <ItemModal 
-           card={selectedCard} 
-           onClose={handleCloseModal}
-           onDelete={handleDeleteItem} />
+        <ItemModal
+          card={selectedCard}
+          onClose={handleCloseModal}
+          onDelete={handleDeleteItem}
+        />
       )}
     </BrowserRouter>
   );

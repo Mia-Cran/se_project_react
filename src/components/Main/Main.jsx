@@ -1,14 +1,10 @@
 import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import { getWeatherCondition } from "../../utils/weatherApi";
 import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-
-
 function Main({ weather, clothingItems, onCardClick, onAddClick }) {
-  console.log("weather in Main:", weather);
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   // wait until weather loads
   if (!weather || !weather.temp) {
@@ -18,25 +14,16 @@ function Main({ weather, clothingItems, onCardClick, onAddClick }) {
       </main>
     );
   }
-
-  const weatherType = getWeatherCondition(weather.temp);
-
-  const filteredItems = clothingItems.filter((item) => {
-    return item.weather === weatherType;
-  });
+  console.log("clothingItems in Main:", clothingItems);
 
   return (
     <main className="container">
       <WeatherCard weather={weather} />
 
       <ul className="main__items">
-        {filteredItems.length === 0 ? (
-          <p>No items for this weather</p>
-        ) : (
-          filteredItems.map((item) => (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
-          ))
-        )}
+        {clothingItems?.map((item) => (
+          <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+        ))}
       </ul>
     </main>
   );

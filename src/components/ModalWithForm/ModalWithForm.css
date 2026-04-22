@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
@@ -31,19 +31,16 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
-
 }
 .modal__form {
   display: flex;
   flex-direction: column;
-
 }
 .modal__label {
   margin: 0 0 24px;
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
-
 }
 .modal__input {
   display: block;
@@ -69,7 +66,6 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
-
 }
 
 .modal__fieldset {
@@ -82,7 +78,6 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 32px;
-
 }
 .modal__radio-label {
   display: flex;
@@ -117,7 +112,6 @@
 
 .modal__submit:hover {
   background-color: rgba(0, 0, 0, 0.6) !important;
-
 }
 .modal__submit:disabled {
   background-color: rgba(0, 0, 0, 0.3) !important;
@@ -175,9 +169,8 @@
 .modal__footer {
   padding: 16px;
   background-color: #fff;
-  padding-top:  10px;
+  padding-top: 10px;
   padding-bottom: 20px;
-  
 }
 
 .modal__caption {
@@ -186,7 +179,6 @@
   line-height: 24px;
   font-weight: 700;
   margin-left: 25px;
-
 }
 
 .modal__weather {

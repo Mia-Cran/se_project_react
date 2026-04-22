@@ -60,10 +60,14 @@
   color: #7e7e7e;
 }
 
-.toggle-switch__checkbox:checked + .toggle-switch__slider .toggle-switch__text_type_f {
+.toggle-switch__checkbox:checked
+  + .toggle-switch__slider
+  .toggle-switch__text_type_f {
   color: #7e7e7e;
 }
 
-.toggle-switch__checkbox:checked + .toggle-switch__slider .toggle-switch__text_type_c {
+.toggle-switch__checkbox:checked
+  + .toggle-switch__slider
+  .toggle-switch__text_type_c {
   color: white;
 }

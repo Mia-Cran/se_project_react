@@ -4,17 +4,14 @@ import "./SideBar.css";
 import avatar from "../../assets/avatar.png";
 
 function SideBar() {
-    const currentUser = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
-    return (
+  return (
     <div className="sidebar">
-        <img className="sidebar__avatar" src={avatar} alt="avatar" />
-        <p className="sidebar__name">
-          {currentUser ? currentUser.name : ""}
-        </p>
-      </div>
-       );
-     }
-   
+      <img className="sidebar__avatar" src={avatar} alt="avatar" />
+      <p className="sidebar__name">{currentUser ? currentUser.name : ""}</p>
+    </div>
+  );
+}
 
 export default SideBar;

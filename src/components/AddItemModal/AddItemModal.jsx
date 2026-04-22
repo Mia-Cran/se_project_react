@@ -3,41 +3,40 @@ import { useState, useEffect } from "react";
 import useForm from "../../hooks/useForm";
 
 function AddItemModal({ isOpen, onClose, onSubmit }) {
-    const [weather, setWeather] = useState("");
+  const [weather, setWeather] = useState("");
 
-    const { values, handleChange, resetForm } = useForm({
-      name: "",
-      imageUrl: "",
+  const { values, handleChange, resetForm } = useForm({
+    name: "",
+    imageUrl: "",
   });
 
   useEffect(() => {
     if (isOpen) {
-    resetForm();
-    setWeather("");
+      resetForm();
+      setWeather("");
     }
   }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-   onSubmit(
-  {
-    name: values.name,
-    imageUrl: values.imageUrl,
-    weather,
-  },
-  () => {
-    resetForm();
-    setWeather("");
-  }
-);
-};  
+    onSubmit(
+      {
+        name: values.name,
+        imageUrl: values.imageUrl,
+        weather,
+      },
+      () => {
+        resetForm();
+        setWeather("");
+      },
+    );
+  };
 
-  const isFormValid = 
+  const isFormValid =
     values.name.trim() !== "" &&
     values.imageUrl.trim() !== "" &&
     weather !== "";
-
 
   return (
     <ModalWithForm
@@ -53,6 +52,7 @@ function AddItemModal({ isOpen, onClose, onSubmit }) {
         Name
         <input
           type="text"
+          required
           name="name"
           className="modal__input"
           placeholder="Name"
@@ -65,6 +65,7 @@ function AddItemModal({ isOpen, onClose, onSubmit }) {
         Image
         <input
           type="url"
+          required
           name="imageUrl"
           className="modal__input"
           placeholder="Image URL"
@@ -80,6 +81,7 @@ function AddItemModal({ isOpen, onClose, onSubmit }) {
           <label className="modal__radio-label">
             <input
               type="radio"
+              required
               name="weather"
               value="hot"
               checked={weather === "hot"}

@@ -1,6 +1,5 @@
 .item__card {
   position: relative;
-
 }
 
 .item__card-img {
@@ -11,7 +10,6 @@
   border-radius: 20px;
   object-fit: cover;
   border-radius: 20px;
-
 }
 
 .item__card-title {

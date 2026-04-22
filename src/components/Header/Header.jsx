@@ -18,10 +18,13 @@ function Header({ onAddClick, city }) {
     <header className="header">
       <div className="header__left">
         <Link to="/">
-        <img src={logo} alt="WTWR app logo" className="smaller__logo" />
+          <img src={logo} alt="WTWR app logo" className="smaller__logo" />
         </Link>
         <div className="main__left">
-          <p className="main__date-location">{currentDate}{city ? `, ${city}` : ""}</p>
+          <p className="main__date-location">
+            {currentDate}
+            {city ? `, ${city}` : ""}
+          </p>
         </div>
       </div>
       <div className="header__right">
@@ -32,11 +35,11 @@ function Header({ onAddClick, city }) {
 
         <Link to="/profile" className="header__user-info">
           <p className="header__username">
-             {currentUser ? currentUser.name : ""}
-             </p>
+            {currentUser ? currentUser.name : ""}
+          </p>
           <img className="header__avatar" src={avatar} alt="User avatar" />
-          </Link>
-        </div>
+        </Link>
+      </div>
     </header>
   );
 }

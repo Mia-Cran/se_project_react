@@ -1,6 +1,7 @@
 # React + Vite
 
 ## Project Description
+
 This project is a React-based application that allows users to view, add, and delete clothing items based on current weather conditions. The app connects to a mock server using json-server to simulate real API interactions, making it behave like a dynamic, data-driven application rather than relying on hardcoded data.
 
 Currently, two official plugins are available:
