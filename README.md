@@ -1,6 +1,7 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Description
+This project is a React-based application that allows users to view, add, and delete clothing items based on current weather conditions. The app connects to a mock server using json-server to simulate real API interactions, making it behave like a dynamic, data-driven application rather than relying on hardcoded data.
 
 Currently, two official plugins are available:
 
@@ -16,3 +17,4 @@ The idea of the application is pretty simple - we make a call to an API, which t
 ## Links
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
+- Google Link for the Pitch: https://drive.google.com/file/d/1AkQsLabKSkKZZnnsd6lfEhamjIFStnZB/view?usp=drive_link
