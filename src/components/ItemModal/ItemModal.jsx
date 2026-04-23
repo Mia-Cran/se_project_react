@@ -25,6 +25,7 @@ function ItemModal({ card, onClose, onDelete }) {
           </div>
 
           <button 
+           type="button"
            className="item-modal__delete" 
            onClick={() => onDelete(card)}
            >

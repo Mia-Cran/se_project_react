@@ -1,16 +1,11 @@
 {
   "items": [
     {
-      "_id": "1",
-      "name": "Jacket",
+      "name": "Hat",
       "weather": "warm",
-      "link": "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=500"
-    },
-    {
-      "_id": "2",
-      "name": "T-Shirt",
-      "weather": "cold",
-      "link": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"
+      "link": " https://images.unsplash.com/photo-1521369909029-2afed882baee?w=500",
+      "id": "7gaSzQaRJO0"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

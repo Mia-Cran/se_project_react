@@ -102,11 +102,11 @@ function App() {
   }, []);
 
   function handleDeleteItem(card) {
-    deleteItem(card._id)
+    deleteItem(card.id)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== card._id),
-        );
+          prevItems.filter((item) => (item._id || item.id) !== card.id),
+      );
         handleCloseModal();
       })
       .catch((err) => {

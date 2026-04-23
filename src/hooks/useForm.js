@@ -6,10 +6,10 @@ function useForm(initialValues) {
   function handleChange(e) {
     const { name, value } = e.target;
 
-    setValues({
-      ...values,
+    setValues((prevValues) => ({
+      ...prevValues,
       [name]: value,
-    });
+    }));
   }
 
   function resetForm() {

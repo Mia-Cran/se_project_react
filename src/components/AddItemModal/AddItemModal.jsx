@@ -15,7 +15,7 @@ function AddItemModal({ isOpen, onClose, onSubmit }) {
       resetForm();
       setWeather("");
     }
-  }, [isOpen, resetForm]);
+  }, [isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
