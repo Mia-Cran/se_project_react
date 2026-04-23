@@ -3,6 +3,8 @@
   display: inline-block;
   width: 64px;
   height: 30px;
+  margin-right: 8px;
+  margin-top: -35px;
 }
 
 .toggle-switch__checkbox {

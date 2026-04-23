@@ -18,10 +18,18 @@ function ItemModal({ card, onClose, onDelete }) {
 
         <img src={card.link} alt={card.name} className="modal__preview-image" />
 
-        <div className="modal__footer">
+        <div className="item-modal__footer">
+          <div className="item-modal__text">
           <p className="modal__caption">{card.name}</p>
           <p className="modal__weather">Weather: {card.weather}</p>
-          <button onClick={() => onDelete(card)}>Delete</button>
+          </div>
+
+          <button 
+           className="item-modal__delete" 
+           onClick={() => onDelete(card)}
+           >
+            Delete item
+          </button>
         </div>
       </div>
     </div>
